@@ -12,7 +12,7 @@ public class CommanderFunctions {
     public static <T> JCommander buidCommanderWithName(String cliName, Supplier <T> argumentsSupplier){
 
         JCommander jCommander = JCommander.newBuilder()
-                .addCommand(argumentsSupplier.get())
+                .addObject(argumentsSupplier.get())
                 .build();
         jCommander.setProgramName(cliName);
         return jCommander;

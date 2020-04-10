@@ -1,14 +1,18 @@
 package com.sumel.jobsearch;
 
 import com.beust.jcommander.JCommander;
+import com.sumel.jobsearch.api.APIJobs;
 import com.sumel.jobsearch.cli.CLIArguments;
+import com.sumel.jobsearch.cli.CLIFunctions;
 import com.sumel.jobsearch.model.JobPosition;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import static com.sumel.jobsearch.api.APIFuntions.buildAPI;
 import static com.sumel.jobsearch.cli.CommanderFunctions.*;
 
 public class JobSearch {
@@ -32,10 +36,14 @@ public class JobSearch {
         cliArgumentsOptional.map(CLIFunctions::toMap)
                 .map(JobSearch::executeRequest)
                 .orElse(Stream.empty())
-                .foreach(System.out::println);
+                .forEach(System.out::println);
     }
 
     private static  Stream<JobPosition> executeRequest(Map<String,Object> params){
-        
+        APIJobs api = buildAPI(APIJobs.class, "htpps://jobs.github.com");
+
+        return  Stream.of(params)
+                .map(api::jobs)
+                .flatMap(Collection::stream);
     }
 }
