@@ -10,7 +10,7 @@ public class CLIArguments {
             required = true,
             descriptionKey = "KEYWORD",
             validateWith = CLIKeyWordValidator.class,
-            description = "Keyword")
+            description = "KEYWORD")
     private String keyWord;
     @Parameter(
             names = {"--location", "-l"},

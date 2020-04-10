@@ -18,6 +18,7 @@ import static com.sumel.jobsearch.cli.CommanderFunctions.*;
 public class JobSearch {
     public static void main(String[] args) {
         System.out.println("---Hello say Job Search---");
+
         JCommander jCommander = buidCommanderWithName("job-search", CLIArguments::newInstance);
         /*Se obtinen en Streams los argumentos que se dieron por erminal*/
         Stream<CLIArguments> streamOfCLI =
@@ -40,7 +41,7 @@ public class JobSearch {
     }
 
     private static  Stream<JobPosition> executeRequest(Map<String,Object> params){
-        APIJobs api = buildAPI(APIJobs.class, "htpps://jobs.github.com");
+        APIJobs api = buildAPI(APIJobs.class, "https://jobs.github.com");
 
         return  Stream.of(params)
                 .map(api::jobs)
