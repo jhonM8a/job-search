@@ -6,7 +6,11 @@ public class CLIArguments {
     CLIArguments(){
 
     }
-    @Parameter(required = true, descriptionKey = "KEYWORD", description = "Keyword")
+    @Parameter(
+            required = true,
+            descriptionKey = "KEYWORD",
+            validateWith = CLIKeyWordValidator.class,
+            description = "Keyword")
     private String keyWord;
     @Parameter(
             names = {"--location", "-l"},
@@ -31,6 +35,7 @@ public class CLIArguments {
     @Parameter(
             names = "--help",
             help = true,
+            validateWith = CLIHelpValidator.class,
             description = "Show help"
     )
     private boolean isHelp;
